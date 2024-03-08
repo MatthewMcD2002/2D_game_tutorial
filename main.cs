@@ -19,35 +19,35 @@ public partial class main : Node
 	{
 	}
 	
-	private void GameOver()
+	public void GameOver()
 	{
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
 	}
 	
-	private void NewGame()
+	public void NewGame()
 	{
 		_score = 0;
 	
-		var player = GetNode<player>("Player");
+		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 	
 		GetNode<Timer>("StartTimer").Start();
 	}
 	
-	private void OnScoreTimerTimeout()
+	public void OnScoreTimerTimeout()
 	{
 		_score++;
 	}
 
-	private void OnStartTimerTimeout()
+	public void OnStartTimerTimeout()
 	{
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
 	}
 	
-	private void OnMobTimerTimeout()
+	public void OnMobTimerTimeout()
 	{
 		// Note: Normally it is best to use explicit types rather than the `var`
 		// keyword. However, var is acceptable to use here because the types are
@@ -77,4 +77,6 @@ public partial class main : Node
 		// Spawn the mob by adding it to the Main scene.
 		AddChild(mob);
 	}
+	
+	
 }
