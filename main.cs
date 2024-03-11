@@ -11,7 +11,7 @@ public partial class main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		NewGame();
+		// Pass
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,11 +23,16 @@ public partial class main : Node
 	{
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		GetNode<HUD>("HUD").ShowGameOver();
 	}
 	
 	public void NewGame()
 	{
 		_score = 0;
+		
+		var hud = GetNode<HUD>("HUD");
+		hud.UpdateScore(_score);
+		hud.ShowMessage("Get Ready!");
 	
 		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
@@ -39,6 +44,7 @@ public partial class main : Node
 	public void OnScoreTimerTimeout()
 	{
 		_score++;
+		GetNode<HUD>("HUD").UpdateScore(_score);
 	}
 
 	public void OnStartTimerTimeout()
@@ -77,6 +83,4 @@ public partial class main : Node
 		// Spawn the mob by adding it to the Main scene.
 		AddChild(mob);
 	}
-	
-	
 }
