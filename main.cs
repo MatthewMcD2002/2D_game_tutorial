@@ -28,6 +28,10 @@ public partial class main : Node
 	
 	public void NewGame()
 	{
+
+		// Clear mobs
+		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
+
 		_score = 0;
 		
 		var hud = GetNode<HUD>("HUD");
