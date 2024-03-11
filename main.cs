@@ -24,11 +24,12 @@ public partial class main : Node
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
 		GetNode<HUD>("HUD").ShowGameOver();
+		GetNode<AudioStreamPlayer>("Music").Stop();
+		GetNode<AudioStreamPlayer>("DeathSound").Play();
 	}
 	
 	public void NewGame()
 	{
-
 		// Clear mobs
 		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 
@@ -43,6 +44,7 @@ public partial class main : Node
 		player.Start(startPosition.Position);
 	
 		GetNode<Timer>("StartTimer").Start();
+		GetNode<AudioStreamPlayer>("Music").Play();
 	}
 	
 	public void OnScoreTimerTimeout()
